@@ -32,6 +32,24 @@ router.get('/:id', async (req, res) => {
     }
 });
 
+router.put('/:id', async (req, res) => {
+    try {
+        const updatedFruit = await Fruit.findByIdAndUpdate(req.params.id, req.body, { new: true });//updating a fruit by its id and sending the updated fruit back to the client
+        res.json(updatedFruit); 
+    } catch (error) {   
+        res.status(400).json({ error: error.message });
+    }
+});
+
+router.delete('/:id', async (req, res) => {
+    try {
+        const deletedFruit = await Fruit.findByIdAndDelete(req.params.id);//deleting a fruit by its id
+        res.json(deletedFruit);//sending the deleted fruit back to the client
+    } catch (error) {
+        res.status(400).json({ error: error.message });
+    }
+});
+
 
 
 
